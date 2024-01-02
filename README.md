@@ -12,9 +12,9 @@ https://prism-pipeline.com/
 
 The ScenePresetsMenu plugin adds a menu to the Prism2 User Settings menu.  In this menu a user may add directories where Prism2 will search for scene file presets.  Any file in the selected directory will be displayed using "Create new version from preset" in the right-click menu of the Project Browser Scenefiles tab.  This enables "empty" scene files to be used across projects.
 
-Example locations is a shared network directory availble to all users, or in the local Documents folder inside the Prism2 directory.
+Example locations: a shared network directory availble to all users, or in the local Documents folder inside the Prism2 directory.
 
-Scene files that are stored in each project's \\*Project*\\*Pipeline folder*\PresetScenes will still show in the right-click menu in addition to the files in the directories specified in this plugin's menu. 
+Scene files that are stored in each project's \\*project*\\*pipelineFolder*\PresetScenes will still show in the right-click menu in addition to the files in the directories specified in this plugin's menu. 
 
 
 
