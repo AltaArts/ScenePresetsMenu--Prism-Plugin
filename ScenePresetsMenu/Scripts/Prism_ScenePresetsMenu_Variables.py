@@ -34,7 +34,7 @@
 ####################################################
 ####################################################
 #
-#           SEND TO MENU PLUGIN
+#        SCENE PRESETS MENU PLUGIN
 #           by Joshua Breckeen
 #                Alta Arts
 #
