@@ -97,87 +97,98 @@ class Prism_ScenePresetsMenu_Functions(object):
     def userSettings_loadUI(self, origin):      #   ADDING "Scene Presets" TO SETTINGS
 
         #   Loads Settings File
-        ScenePresetsList = self.loadSettings()
+        scenePresetsList = self.loadSettings()
         headerLabels = ["Path"]
 
         # Create a Widget
-        origin.w_ScenePresets = QWidget()
-        origin.lo_ScenePresets = QVBoxLayout(origin.w_ScenePresets)
+        origin.w_scenePresets = QWidget()
+        origin.lo_scenePresets = QVBoxLayout(origin.w_scenePresets)
 
         #   Send To Menu UI List
-        gb_ScenePresets = QGroupBox("Scene Presets Directory")
-        lo_ScenePresets = QVBoxLayout()
-        gb_ScenePresets.setLayout(lo_ScenePresets)
+        gb_scenePresets = QGroupBox("Scene Presets Directory")
+        lo_scenePresets = QVBoxLayout()
+        gb_scenePresets.setLayout(lo_scenePresets)
 
-        tw_ScenePresets = QTableWidget()
-        tw_ScenePresets.setColumnCount(len(headerLabels))
-        tw_ScenePresets.setHorizontalHeaderLabels(headerLabels)
-        tw_ScenePresets.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
+        tw_scenePresets = QTableWidget()
+        tw_scenePresets.setColumnCount(len(headerLabels))
+        tw_scenePresets.setHorizontalHeaderLabels(headerLabels)
+        tw_scenePresets.horizontalHeader().setDefaultAlignment(Qt.AlignLeft)
 
         #   Sets initial table size
-        tw_ScenePresets.setMinimumHeight(300)  # Adjust the value as needed
+        tw_scenePresets.setMinimumHeight(300)  # Adjust the value as needed
 
 
         #   Adds Buttons
-        w_ScenePresets = QWidget()
-        lo_ScenePresetsButtons = QHBoxLayout()
+        w_scenePresets = QWidget()
+        lo_scenePresetsButtons = QHBoxLayout()
         b_addScenePresets = QPushButton("Add")
         b_removeScenePresets = QPushButton("Remove")
 
-        w_ScenePresets.setLayout(lo_ScenePresetsButtons)
-        lo_ScenePresetsButtons.addStretch()
-        lo_ScenePresetsButtons.addWidget(b_addScenePresets)
-        lo_ScenePresetsButtons.addWidget(b_removeScenePresets)
+        w_scenePresets.setLayout(lo_scenePresetsButtons)
+        lo_scenePresetsButtons.addStretch()
+        lo_scenePresetsButtons.addWidget(b_addScenePresets)
+        lo_scenePresetsButtons.addWidget(b_removeScenePresets)
 
-        lo_ScenePresets.addWidget(tw_ScenePresets)
-        lo_ScenePresets.addWidget(w_ScenePresets)
-        origin.lo_ScenePresets.addWidget(gb_ScenePresets)
+        lo_scenePresets.addWidget(tw_scenePresets)
+        lo_scenePresets.addWidget(w_scenePresets)
+        origin.lo_scenePresets.addWidget(gb_scenePresets)
 
         #   Makes ReadOnly
-        tw_ScenePresets.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        tw_scenePresets.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+        #   Configures table
+        tw_scenePresets.setSelectionBehavior(QTableWidget.SelectRows)
+        tw_scenePresets.setSelectionMode(QTableWidget.SingleSelection)
 
         # Set resizing mode for the "Path" column to stretch
-        tw_ScenePresets.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        tw_scenePresets.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
 
         #   Executes button actions
-        b_addScenePresets.clicked.connect(lambda: self.addScenePresetsDir(origin, tw_ScenePresets))
-        b_removeScenePresets.clicked.connect(lambda: self.removeScenePresetsDir(origin, tw_ScenePresets))
+        b_addScenePresets.clicked.connect(lambda: self.addScenePresetsDir(origin, tw_scenePresets))
+        b_removeScenePresets.clicked.connect(lambda: self.removeScenePresetsDir(origin, tw_scenePresets))
 
         #   Populates lists from Settings File Data
-        for item in ScenePresetsList:
-            rowPosition = tw_ScenePresets.rowCount()
-            tw_ScenePresets.insertRow(rowPosition)
-            tw_ScenePresets.setItem(rowPosition, 0, QTableWidgetItem(item.get("Path", "")))
+        for item in scenePresetsList:
+            rowPosition = tw_scenePresets.rowCount()
+            tw_scenePresets.insertRow(rowPosition)
+            tw_scenePresets.setItem(rowPosition, 0, QTableWidgetItem(item.get("Path", "")))
+
+        #   Tooltip
+        tip = ("Directories that will hold Preset Scene Files.\n\n"
+                "These will be available to all projects in addition to the ones\n"
+                "included in the Project's Pipeline folder."
+                )
+        tw_scenePresets.setToolTip(tip)
 
         # Add Tab to User Settings
-        origin.addTab(origin.w_ScenePresets, "Scene Presets")
+        origin.addTab(origin.w_scenePresets, "Scene Presets")
 
 
     @err_catcher(name=__name__)
-    def addScenePresetsDir(self, origin, tw_ScenePresets):
+    def addScenePresetsDir(self, origin, tw_scenePresets):
 
         # Open native file dialog to choose a directory
         directory = QFileDialog.getExistingDirectory(origin, "Select Scene Presets Directory", QDir.homePath())
 
         # Check if the user selected a directory
         if directory:
-            rowPosition = tw_ScenePresets.rowCount()
-            tw_ScenePresets.insertRow(rowPosition)
-            tw_ScenePresets.setItem(rowPosition, 0, QTableWidgetItem(directory))
+            rowPosition = tw_scenePresets.rowCount()
+            tw_scenePresets.insertRow(rowPosition)
+            tw_scenePresets.setItem(rowPosition, 0, QTableWidgetItem(directory))
 
             # Save UI List to JSON file
-            self.saveSettings(tw_ScenePresets)
+            self.saveSettings(tw_scenePresets)
 
     @err_catcher(name=__name__)
-    def removeScenePresetsDir(self, origin, tw_ScenePresets):
+    def removeScenePresetsDir(self, origin, tw_scenePresets):
 
-        selectedRow = tw_ScenePresets.currentRow()
+        selectedRow = tw_scenePresets.currentRow()
 
         if selectedRow != -1:
-            tw_ScenePresets.removeRow(selectedRow)
+            tw_scenePresets.removeRow(selectedRow)
 
             #   Saves UI List to JSON file
-            self.saveSettings(tw_ScenePresets)
+            self.saveSettings(tw_scenePresets)
 
 
     @err_catcher(name=__name__)
@@ -194,13 +205,13 @@ class Prism_ScenePresetsMenu_Functions(object):
 
 
     @err_catcher(name=__name__)
-    def saveSettings(self, tw_ScenePresets):
+    def saveSettings(self, tw_scenePresets):
 
         data = []
 
         #   Populates data[] from UI List
-        for row in range(tw_ScenePresets.rowCount()):
-            pathItem = tw_ScenePresets.item(row, 0)
+        for row in range(tw_scenePresets.rowCount()):
+            pathItem = tw_scenePresets.item(row, 0)
 
             if pathItem:
                 location = pathItem.text()
