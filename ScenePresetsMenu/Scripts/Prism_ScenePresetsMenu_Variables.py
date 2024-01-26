@@ -34,7 +34,7 @@
 ####################################################
 ####################################################
 #
-#        SCENE PRESETS MENU PLUGIN
+#           SEND TO MENU PLUGIN
 #           by Joshua Breckeen
 #                Alta Arts
 #
@@ -49,7 +49,7 @@ import os
 
 class Prism_ScenePresetsMenu_Variables(object):
     def __init__(self, core, plugin):
-        self.version = "v2.0.2-1.1"
+        self.version = "v2.0.2-1.2"
         self.pluginName = "ScenePresetsMenu"
         self.pluginType = "Custom"
         self.platforms = ["Windows", "Linux", "Darwin"]
