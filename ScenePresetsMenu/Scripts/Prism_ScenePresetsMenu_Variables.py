@@ -49,7 +49,7 @@ import os
 
 class Prism_ScenePresetsMenu_Variables(object):
     def __init__(self, core, plugin):
-        self.version = "v2.0.2-1.3"
+        self.version = "v2.0.2-1.4"
         self.pluginName = "ScenePresetsMenu"
         self.pluginType = "Custom"
         self.platforms = ["Windows", "Linux", "Darwin"]
