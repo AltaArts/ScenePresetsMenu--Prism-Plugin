@@ -12,11 +12,20 @@ https://prism-pipeline.com/
 
 The ScenePresetsMenu plugin adds a menu to the Prism2 User Settings menu.  In this menu a user may add directories where Prism2 will search for scene file presets.  Any file in the selected directory will be displayed using "Create new version from preset" in the right-click menu of the Project Browser Scenefiles tab.  This enables "empty" scene files to be used across projects.
 
-Example locations: a shared network directory availble to all users, or in the local Documents folder inside the Prism2 directory.
+![Menu](https://github.com/AltaArts/ScenePresetsMenu--Prism-Plugin/assets/86539171/55b1acc5-4389-48c6-b243-5e52e09fb675)
+
+
+
+Tip:  Preset Scenefiles may be organized in subfolders to help with organization.  For example several different DCC templates files under the DCC directory.
+
+![RCL Menu](https://github.com/AltaArts/ScenePresetsMenu--Prism-Plugin/assets/86539171/6712b7f2-f158-427a-8a70-23ceba8e1da7)
+
+
+Example locations: a shared network directory available to all users, or in the local Documents folder inside the Prism2 directory.
 
 Scene files that are stored in each project's \\*project*\\*pipelineFolder*\PresetScenes will still show in the right-click menu in addition to the files in the directories specified in this plugin's menu. 
 
-
+There is an added option in the Prism ScenePresetsMenu settings so a user may disable the display of the default scene presets that are included with DCC plugins.  This allows for Prism to display only the users custom presets from the added directory.
 
 
 ## **Installation**
